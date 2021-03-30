@@ -9,6 +9,7 @@ const emptyDir = (dirpath) => {
       if (err) reject(err);
       for (const file of files) {
         try {
+          if (file === ".keep") continue;
           fs.unlinkSync(path.join(dirpath, file));
         } catch(err) {
           reject(err);
