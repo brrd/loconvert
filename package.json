@@ -18,5 +18,8 @@
     "converter"
   ],
   "author": "brrd",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "locate-path": "^6.0.0"
+  }
 }
