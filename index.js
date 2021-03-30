@@ -14,18 +14,26 @@ const loPaths = {
 };
 
 function convert({document, format = "html", outdir, customPath}) {
-  if (document == null) {
-    throw Error("document is null");
-  }
-
-  const cwd = process.cwd();
-  const documentPath = path.join(cwd, document);
-  const outdirArg = outdir ? `--outdir "${path.join(cwd, outdir)}"` : "";
-  const args = ["--headless", `--convert-to ${format}`, outdirArg, `"${documentPath}"`];
-  const loPath = customPath ? [customPath] : loPaths[process.platform];
-  return locatePath(loPath).then((exePath) => {
-    const command = `"${exePath}" ${args.join(" ")}`;
-    return exec(command);
+  return new Promise((resolve, reject) => {
+    if (document == null) {
+      reject("document is null");
+    }
+  
+    const cwd = process.cwd();
+    // TODO: allow absolute paths
+    const documentPath = path.join(cwd, document);
+    const outdirArg = outdir ? `--outdir "${path.join(cwd, outdir)}"` : "";
+    const args = ["--headless", `--convert-to ${format}`, outdirArg, `"${documentPath}"`];
+    const loPath = customPath ? [customPath] : loPaths[process.platform];
+    locatePath(loPath).then((exePath) => {
+      const command = `"${exePath}" ${args.join(" ")}`;
+      return exec(command, (error, stdout, stderr) => {
+        if (error) {
+          reject(error);
+        }
+        resolve(stdout? stdout : stderr);
+      });
+    });
   });
 }
 
