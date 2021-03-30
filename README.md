@@ -8,9 +8,9 @@
 const convert = require("loconvert");
 
 convert({
-	document: "./src/test.docx",
+	document: "./test/src/test.docx",
 	format: "\"html:XHTML Writer File:UTF8\"",
-	outdir: "./out"
+	outdir: "./test/out"
 })
 .then(() => console.log("done"));
 ```
