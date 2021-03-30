@@ -1,0 +1,22 @@
+{
+  "name": "loconvert",
+  "version": "0.1.0",
+  "description": "LibreOffice documents converter",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brrd/loconvert"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "libreoffice",
+    "convert",
+    "soffice",
+    "document",
+    "converter"
+  ],
+  "author": "brrd",
+  "license": "MIT"
+}
