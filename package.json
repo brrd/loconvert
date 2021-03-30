@@ -21,5 +21,8 @@
   "license": "MIT",
   "dependencies": {
     "locate-path": "^6.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.23.0"
   }
 }
