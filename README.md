@@ -1,6 +1,16 @@
 # loconvert
 
-> LibreOffice documents converter in Node.js
+Convert office documents in Node.js using LibreOffice (soffice.exe).
+
+LibreOffice must be installed. 
+
+This supports multliple documents conversion on Windows (see issue https://wiki.documentfoundation.org/Faq/General/150).
+
+## Installation
+
+```
+npm install loconvert --save
+```
 
 ## Usage
 
@@ -11,7 +21,8 @@ const convert = require("loconvert");
 convert({
 	input: "./test/src/test.docx",
 	format: "\"html:XHTML Writer File:UTF8\"",
-	outdir: "./test/out"
+	outdir: "./test/out",
+	customPath: "optional/custom/path/to/libreoffice/directory"
 })
 .then(() => console.log("done"));
 
