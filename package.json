@@ -1,7 +1,7 @@
 {
   "name": "loconvert",
-  "version": "0.1.0",
-  "description": "LibreOffice documents converter",
+  "version": "1.0.0",
+  "description": "LibreOffice document converter",
   "main": "index.js",
   "repository": {
     "type": "git",
