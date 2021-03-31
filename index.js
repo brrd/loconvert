@@ -33,7 +33,7 @@ const getExePath = (customPath) => {
   });
 };
 
-function convert({document, format = "html", outdir, customPath}) {
+function convert({ document, format = "html", outdir, customPath }) {
   return new Promise((resolve, reject) => {
     if (document == null) {
       reject("document is null");
@@ -55,12 +55,13 @@ function convert({document, format = "html", outdir, customPath}) {
   });
 }
 
-function convertAll({documents, format, outdir, customPath}) {
+function convertAll({ input, format, outdir, customPath }) {
   const limit = pLimit(1);
+  const documents = Array.isArray(input) ? input : [input];
   const proms = documents.map((document) => {
-    return limit(() => convert({document, format, outdir, customPath}));
+    return limit(() => convert({ document, format, outdir, customPath }));
   });
   return Promise.all(proms);
 }
 
-module.exports = { convert, convertAll };
+module.exports = convertAll;

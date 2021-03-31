@@ -5,17 +5,19 @@
 ## Usage
 
 ```javascript
-const { convert, convertAll } = require("./index.js");
+const convert = require("loconvert");
 
+// Convert a single document
 convert({
-	document: "./test/src/test.docx",
+	input: "./test/src/test.docx",
 	format: "\"html:XHTML Writer File:UTF8\"",
 	outdir: "./test/out"
 })
 .then(() => console.log("done"));
 
-convertAll({
-	documents: ["./test/src/test.docx", "./test/src/test2.docx"],
+// Convert multiple documents
+convert({
+	input: ["./test/src/test.docx", "./test/src/test2.docx"],
 	format: "\"html:XHTML Writer File:UTF8\"",
 	outdir: "./test/out"
 })

@@ -1,7 +1,7 @@
 const test = require("ava");
 const fs = require("fs");
 const path = require("path");
-const { convert, convertAll } = require("./index.js");
+const convert = require("./index.js");
 
 const emptyDir = (dirpath) => {
   return new Promise((resolve, reject) => {
@@ -33,7 +33,7 @@ test.serial("Convert a single document (relative path)", async t => {
   const outDocPath = path.join(outDirpath, "test.html");
 
   await convert({
-    document: docPath,
+    input: docPath,
     format: "\"html:XHTML Writer File:UTF8\"",
     outdir: outDirpath
   });
@@ -47,7 +47,7 @@ test.serial("Convert a single document (absolute path)", async t => {
   const outDocPath = path.join(__dirname, outDirpath, "test.html");
 
   await convert({
-    document: docPath,
+    input: docPath,
     format: "\"html:XHTML Writer File:UTF8\"",
     outdir: outDirpath
   });
@@ -60,8 +60,8 @@ test.serial("Convert multiple documents", async t => {
   const outDirpath = "test/out";
   const outDocPath = path.join(outDirpath, "test.html");
 
-  await convertAll({
-    documents: docPaths,
+  await convert({
+    input: docPaths,
     format: "\"html:XHTML Writer File:UTF8\"",
     outdir: outDirpath
   });
