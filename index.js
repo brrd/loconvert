@@ -2,6 +2,7 @@ const util = require("util");
 const exec = util.promisify(require("child_process").exec);
 const path = require("path");
 const locatePath = require("locate-path");
+const pLimit = require("p-limit");
 
 const cwd = process.cwd();
 
@@ -54,4 +55,12 @@ function convert({document, format = "html", outdir, customPath}) {
   });
 }
 
-module.exports = convert;
+function convertAll({documents, format, outdir, customPath}) {
+  const limit = pLimit(1);
+  const proms = documents.map((document) => {
+    return limit(() => convert({document, format, outdir, customPath}));
+  });
+  return Promise.all(proms);
+}
+
+module.exports = { convert, convertAll };

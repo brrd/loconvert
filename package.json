@@ -20,7 +20,8 @@
   "author": "brrd",
   "license": "MIT",
   "dependencies": {
-    "locate-path": "^6.0.0"
+    "locate-path": "^6.0.0",
+    "p-limit": "^3.1.0"
   },
   "devDependencies": {
     "ava": "^3.15.0",
