@@ -13,18 +13,20 @@ const loPaths = {
   ]
 };
 
+const cwd = process.cwd();
+const getAbsolutePath = (p) => path.isAbsolute(p) ? p : path.join(cwd, p);
+
 function convert({document, format = "html", outdir, customPath}) {
   return new Promise((resolve, reject) => {
     if (document == null) {
       reject("document is null");
     }
   
-    const cwd = process.cwd();
-    // TODO: allow absolute paths
-    const documentPath = path.join(cwd, document);
-    const outdirArg = outdir ? `--outdir "${path.join(cwd, outdir)}"` : "";
+    const documentPath = getAbsolutePath(document);
+    const outdirArg = outdir ? `--outdir "${getAbsolutePath(outdir)}"` : "";
     const args = ["--headless", `--convert-to ${format}`, outdirArg, `"${documentPath}"`];
     const loPath = customPath ? [customPath] : loPaths[process.platform];
+
     locatePath(loPath).then((exePath) => {
       const command = `"${exePath}" ${args.join(" ")}`;
       return exec(command, (error, stdout, stderr) => {
